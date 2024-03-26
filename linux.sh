@@ -33,7 +33,7 @@ lista_programas=(
 )
 
 #------------------- Desinstalación de programas (APT) ------------------- #
-lista_programamas_a_desinstalar=(
+lista_programas_a_desinstalar=(
     gnome-games
     gnome-weather
     calendar
@@ -114,8 +114,18 @@ sudo dpkg -i code_1.87.2-1709912201_amd64.deb
 #clion
 # ./install.sh --bin /usr/bin/idea --desktop-file /usr/share/applications/jetbrains-idea.desktop --create-package /tmp/jetbrains-idea.deb
 
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+sudo rm -rf /opt/nvim
+sudo tar -C /opt -xzf nvim-linux64.tar.gz
+echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >> ~/.zshrc
+
 sudo apt-get update -y && sudo apt-get install spotify-client -y
 sudo apt autoremove -y
 sudo apt autoclean -y
@@ -127,11 +137,11 @@ unzip kora.zip
 unzip Orchis-Dark-Compact.zip
 sudo mv kora /usr/share/icons
 sudo mv Orchis-Dark-Compact /usr/share/themes
+sudo mkdir ~/.local/share/fonts/
 sudo mv CascadiaCode.ttf ~/.local/share/fonts
 sudo mv CaskaydiaCoveNerdFontMono-SemiBold.ttf ~/.local/share/fonts
 sudo reboot
 
 # Despues de esto puedes meterte en tweaks y elegir en icons kora
 # Despues instalar gnome shell extensions (User themes, dash to dock, coverflow alt-tab, etc)
-# Recomiendo mucho el tema Orchis gtk theme -> Se descarga y se mueve 
-# Orchis dark compact a la carpeta /usr/share/themes
+# Shell Orchis theme tambien en Tweaks
