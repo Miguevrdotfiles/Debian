@@ -92,7 +92,7 @@ function desinstalar_programas() {
     done
 }
 
-# ------------------- Ejecución del script ------------------- #
+#-----------------------| Ejecución del script |-------------------------------#
 
 
 sudo apt update
@@ -104,29 +104,30 @@ desinstalar_programas "${lista_programas_a_desinstalar[@]}"
 sudo apt autoremove -y
 sudo apt autoclean -y
 
-# ------------------- Instalación de programas (NO APT) ------------------- #
+# ------------------- Instalación de programas (NO APT) -----------------------#
 
 wget https://cdn.insynchq.com/builds/linux/insync_3.8.7.50516-bookworm_amd64.deb
 sudo dpkg -i insync_3.8.7.50516-bookworm_amd64.deb
 
-wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/863d2581ecda6849923a2118d93a088b0745d9d6/code_1.87.2-1709912201_amd64.deb
-sudo dpkg -i code_1.87.2-1709912201_amd64.deb
-#clion
-# ./install.sh --bin /usr/bin/idea --desktop-file /usr/share/applications/jetbrains-idea.desktop --create-package /tmp/jetbrains-idea.deb
-
+wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/5c3e652f63e798a5ac2f31ffd0d863669328dc4c/code_1.88.0-1712152114_amd64.deb
+sudo dpkg -i code_1.88.0-1712152114_amd64.deb
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
-echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/powerlevel10k
+echo 'source ~/.oh-my-zsh/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-sudo rm -rf /opt/nvim
-sudo tar -C /opt -xzf nvim-linux64.tar.gz
-echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >> ~/.zshrc
+# ------------------ Instalacion de programas Flatpak -------------------------#
 
-sudo apt-get update -y && sudo apt-get install spotify-client -y
+sudo apt install flatpak -y
+sudo apt install gnome-software-plugin-flatpak
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub io.neovim.nvim
+
+
+
+
+
+
 sudo apt autoremove -y
 sudo apt autoclean -y
 
