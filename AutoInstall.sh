@@ -19,6 +19,9 @@ lista_programas=(
     git
     ssh
     zsh
+    build-essential
+    btop
+    flatpak
     curl
     gcc
     make
@@ -28,6 +31,7 @@ lista_programas=(
     openjdk-17-jdk
     gnuplot
     neofetch
+    gnome-software-plugin-flatpak
     neovim
     okular
 )
@@ -48,6 +52,7 @@ lista_programas_a_desinstalar=(
     gnome-sudoku
     evolution
     kdeconnect
+    shotwell
     cheese
     evince
 )
@@ -106,43 +111,14 @@ sudo apt autoclean -y
 
 # ------------------- Instalación de programas (NO APT) -----------------------#
 
-wget https://cdn.insynchq.com/builds/linux/insync_3.8.7.50516-bookworm_amd64.deb
-sudo dpkg -i insync_3.8.7.50516-bookworm_amd64.deb
-
-wget https://vscode.download.prss.microsoft.com/dbazure/download/stable/5c3e652f63e798a5ac2f31ffd0d863669328dc4c/code_1.88.0-1712152114_amd64.deb
-sudo dpkg -i code_1.88.0-1712152114_amd64.deb
-
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/powerlevel10k
 echo 'source ~/.oh-my-zsh/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+cargo install alacritty
+
 # ------------------ Instalacion de programas Flatpak -------------------------#
+flatpak install flathub com.spotify.Client
 
-sudo apt install flatpak -y
-sudo apt install gnome-software-plugin-flatpak
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub io.neovim.nvim
-
-
-
-
-
-
-sudo apt autoremove -y
-sudo apt autoclean -y
-
-cd ~/Downloads
-git clone https://github.com/Miguevrdotfiles/Debian
-cd Debian
-unzip kora.zip
-unzip Orchis-Dark-Compact.zip
-sudo mv kora /usr/share/icons
-sudo mv Orchis-Dark-Compact /usr/share/themes
-sudo mkdir ~/.local/share/fonts/
-sudo mv CascadiaCode.ttf ~/.local/share/fonts
-sudo mv CaskaydiaCoveNerdFontMono-SemiBold.ttf ~/.local/share/fonts
-sudo reboot
-
-# Despues de esto puedes meterte en tweaks y elegir en icons kora
-# Despues instalar gnome shell extensions (User themes, dash to dock, coverflow alt-tab, etc)
-# Shell Orchis theme tambien en Tweaks
