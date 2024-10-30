@@ -27,13 +27,16 @@ lista_programas=(
     make
     cmake
     g++
-    texlive-full
+    texlive
+    texlive-lang-spanish
     openjdk-17-jdk
     gnuplot
     neofetch
     gnome-software-plugin-flatpak
     neovim
+    clang-19
     okular
+    clang
 )
 
 #------------------- Desinstalación de programas (APT) ------------------- #
